@@ -1,4 +1,6 @@
 from datetime import timedelta
+import dj_database_url
+
 """
 Django settings for techdome_todo_project project.
 
@@ -77,22 +79,9 @@ WSGI_APPLICATION = 'techdome_todo_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-#Note you can store these credentials in AWS secret manager
 DATABASES = {
-    'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'test_user', #enter your db name here
-        'USER': 'techdome_test_user',#enter your db username here
-        'PASSWORD': '*********',#enter your password here
-        'HOST': 'localhost',#enter your local db host or rds instance host arn
-        'PORT': 1433, 
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-            'extra_params': 'TrustServerCertificate=yes;',
-        },
-    }
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
