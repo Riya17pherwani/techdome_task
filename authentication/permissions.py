@@ -3,8 +3,9 @@ from .models import ROLES
 
 class IsAdmin(BasePermission):
     def has_permission(self, request, view):
-        return request.user and request.user.roles == ROLES.ADMIN.value
+        return request.user.is_authenticated and request.user.role == ROLES.ADMIN.value
 
-class IsUser(BasePermission):
+class IsUserOrAdmin(BasePermission):
     def has_permission(self, request, view):
-        return request.user and request.user.roles == ROLES.USER.value
+        return request.user.is_authenticated
+

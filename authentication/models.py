@@ -11,7 +11,7 @@ class ROLES(IntEnum):
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
 
-    roles = models.IntegerField(
+    role = models.IntegerField(
         choices=[(tag.value, tag.name) for tag in ROLES],
         default=ROLES.USER.value
     )
